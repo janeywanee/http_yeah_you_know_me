@@ -11,9 +11,10 @@ class Server
   end
 
   def take_in_request
+    l
     puts "Ready for a request"
     request_lines = []
-    binding.pry
+    end
     while line = @client.gets and !line.chomp.empty?
       request_lines << line.chomp
     end

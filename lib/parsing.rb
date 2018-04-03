@@ -1,4 +1,11 @@
 class Parsing
+  attr_reader :verb,
+              :path,
+              :protocol,
+              :host,
+              :port,
+              :origin,
+              :accept
 
   def initialize(response_data)
     @verb = response_data[0].split[0]
