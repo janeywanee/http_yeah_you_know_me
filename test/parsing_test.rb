@@ -1,10 +1,10 @@
-require 'mintest/autorun'
-require 'mintest/pride'
+require 'minitest/autorun'
+require 'minitest/pride'
 require './lib/parsing'
 require 'pry'
 
 class ParsingTest < Minitest::Test
-  
+
   def setup
     @response_data = ["GET / HTTP/1.1",
                      "Host: 127.0.0.1:9292",
