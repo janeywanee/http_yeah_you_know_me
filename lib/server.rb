@@ -7,23 +7,22 @@ class Server
   end
 
   def accept_connection
-      @client = @tcp_server.accept
+    @client = @tcp_server.accept
   end
 
   def take_in_request
     puts "Ready for a request"
     request_lines = []
-
+    binding.pry
     while line = @client.gets and !line.chomp.empty?
       request_lines << line.chomp
     end
-
     puts "Got this request:"
     puts request_lines
   end
 
   def response
-    response = "<pre> Hello, World!(#{@counter}) </pre>"
+    response = "<pre> Hello,World!(#{@counter}) </pre>"
     @counter += 1
     output = "<html><head></head><body>#{response}</body></html>"
     headers = ["http/1.1 200 ok",
