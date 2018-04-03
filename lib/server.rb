@@ -1,4 +1,6 @@
+require_relative 'parsing'
 require 'socket'
+require 'pry'
 class Server
 
   def initialize
@@ -11,13 +13,13 @@ class Server
   end
 
   def take_in_request
-    l
     puts "Ready for a request"
     request_lines = []
-    end
+    # end
     while line = @client.gets and !line.chomp.empty?
       request_lines << line.chomp
     end
+    @parsing = Parsing.new(request_lines)
     puts "Got this request:"
     puts request_lines
   end
@@ -26,7 +28,8 @@ class Server
     response = "<pre> Hello,World!(#{@counter}) </pre>"
     @counter += 1
     output = "<html><head></head><body>#{response}</body></html>"
-    headers = ["http/1.1 200 ok",
+    headers = ["#{@parsing.verb}",
+              "#{@parsing.protocol} 200 ok",
               "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
               "server: ruby",
               "content-type: text/html; charset=iso-8859-1",
@@ -40,12 +43,22 @@ class Server
   def close_connection
     @client = @tcp_server.close
   end
+
+  def run_shit
+    loop do
+      accept_connection
+      take_in_request
+      response
+      # close_connection
+    end
+  end
 end
 
 
 
 server = Server.new
-server.accept_connection
-server.take_in_request
-server.response
-server.close_connection
+server.run_shit
+# server.accept_connection
+# server.take_in_request
+# server.response
+# server.close_connection

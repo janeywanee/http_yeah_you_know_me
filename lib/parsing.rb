@@ -15,4 +15,5 @@ class Parsing
     @port = response_data[1].split[1].split(':')[1]
     @origin = response_data[1].split[1].split(':')[0]
     @accept = response_data.find { |item| item.start_with?('Accept:') }.split[1]
+  end
 end
