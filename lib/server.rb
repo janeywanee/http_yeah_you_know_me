@@ -4,7 +4,7 @@ require 'pry'
 class Server
 
   def initialize
-    @tcp_server = TCPServer.new(9292)
+    @tcp_server = TCPServer.new(9494)
     @counter = 0
     @hello_counter = 0
   end
@@ -16,7 +16,6 @@ class Server
   def take_in_request
     puts "Ready for a request"
     request_lines = []
-    # end
     while line = @client.gets and !line.chomp.empty?
       request_lines << line.chomp
     end
@@ -64,9 +63,20 @@ class Server
     when "/shutdown"
       @response << "Total Requests: #{@counter}"
     else
-      @hello_counter += 1
-      @response << "Hello World! (#{@hello_counter})"
+      @response << diagnostics
     end
+  end
+
+  def diagnostics
+    "<pre>
+    Verb: #{@parsed.verb}
+    Path: #{@parsed.path}
+    Protocol: #{@parsed.protocol}
+    Host: #{@parsed.host}
+    Port: #{@parsed.port}
+    Origin: #{@parsed.origin}
+    Accept: #{@parsed.accept}
+    </pre>"
   end
 end
 

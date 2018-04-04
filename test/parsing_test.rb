@@ -17,4 +17,11 @@ class ParsingTest < Minitest::Test
                      "Accept-Language: en-US,en;q=0.9"]
 
   end
+
+  def test_it_exists
+    parsing = Parsing.new(@response_data)
+
+    assert_instance_of Parsing, parsing
+  end
+
 end
