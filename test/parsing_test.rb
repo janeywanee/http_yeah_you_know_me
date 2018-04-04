@@ -42,6 +42,32 @@ class ParsingTest < Minitest::Test
     assert_equal "HTTP/1.1", parsing.protocol
   end
 
+  def test_host_returns_host_from_request
+    parsing = Parsing.new(@response_data)
+
+    assert_equal "127.0.0.1", parsing.host
+  end
+
+  def test_port_returns_port_from_request
+    parsing = Parsing.new(@response_data)
+
+    assert_equal "9292", parsing.port
+  end
+
+  def test_origin_returns_origin_from_request
+    parsing = Parsing.new(@response_data)
+
+    assert_equal "127.0.0.1", parsing.origin
+  end
+
+  def test_accept_returns_accept_from_request
+    parsing = Parsing.new(@response_data)
+
+    assert_equal "*/*", parsing.accept
+  end
+
+
+
   def test_diagonostic_outputs_data
     skip
     parsing = Parsing.new(@response_data)

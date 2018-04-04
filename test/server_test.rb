@@ -19,7 +19,7 @@ end
 
 
 
-
+# 
 # def test_request_returns_hello_world
 #   response = Faraday.get "http://127.0.0.1:9292"
 #

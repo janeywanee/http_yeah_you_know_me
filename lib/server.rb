@@ -4,7 +4,7 @@ require 'pry'
 class Server
 
   def initialize
-    @tcp_server = TCPServer.new(9494)
+    @tcp_server = TCPServer.new(9292)
     @counter = 0
     @hello_counter = 0
   end
