@@ -19,13 +19,13 @@ class Parsing
 
   def diagnostics
     "<pre>
-    Verb: #{@parsed.verb}
-    Path: #{@parsed.path}
-    Protocol: #{@parsed.protocol}
-    Host: #{@parsed.host}
-    Port: #{@parsed.port}
-    Origin: #{@parsed.origin}
-    Accept: #{@parsed.accept}
+    Verb: #{@parsed}
+    Path: #{@parsed}
+    Protocol: #{@parsed}
+    Host: #{@parsed}
+    Port: #{@parsed}
+    Origin: #{@parsed}
+    Accept: #{@parsed}
     </pre>"
   end
 end
