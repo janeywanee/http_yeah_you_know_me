@@ -1,3 +1,4 @@
+require 'pry'
 class Parsing
   attr_reader :verb,
               :path,
@@ -17,15 +18,26 @@ class Parsing
     @accept = response_data.find { |item| item.start_with?('Accept:') }.split[1]
   end
 
-  def diagnostics
-    "<pre>
-    Verb: #{@parsed}
-    Path: #{@parsed}
-    Protocol: #{@parsed}
-    Host: #{@parsed}
-    Port: #{@parsed}
-    Origin: #{@parsed}
-    Accept: #{@parsed}
-    </pre>"
+#Get working!!
+  def diagnostic(request_lines)
+    binding.pry
+    "<pre>" + "\r\n" +
+  ["Verb: #{verb}",
+   "Path: #{path}",
+   "Protocol: #{protocol}",
+   "Host: #{host}",
+   "Port: #{port}",
+   "Origin: #{host}",
+   "Accept:#{accept}"].join("\n") + "</pre>"
   end
 end
+
+# "<pre>
+# Verb: #{@parsed}
+# Path: #{@parsed}
+# Protocol: #{@parsed}
+# Host: #{@parsed}
+# Port: #{@parsed}
+# Origin: #{@parsed}
+# Accept: #{@parsed}
+# </pre>"

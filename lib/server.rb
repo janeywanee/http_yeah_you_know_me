@@ -2,11 +2,14 @@ require_relative 'parsing'
 require 'socket'
 require 'pry'
 class Server
+  attr_reader :tcp_server
+  attr_accessor :client, :request_lines
 
   def initialize
     @tcp_server = TCPServer.new(9292)
     @counter = 0
     @hello_counter = 0
+    @request_lines = []
   end
 
   def accept_connection
@@ -15,7 +18,7 @@ class Server
 
   def take_in_request
     puts "Ready for a request"
-    request_lines = []
+    # request_lines = []
     while line = @client.gets and !line.chomp.empty?
       request_lines << line.chomp
     end
@@ -63,27 +66,16 @@ class Server
     when "/shutdown"
       @response << "Total Requests: #{@counter}"
     else
-      @response << diagnostics
+      binding.pry
+        @response << @parsed.diagnostic(request_lines)
     end
-  end
-
-  def diagnostics
-    "<pre>
-    Verb: #{@parsed.verb}
-    Path: #{@parsed.path}
-    Protocol: #{@parsed.protocol}
-    Host: #{@parsed.host}
-    Port: #{@parsed.port}
-    Origin: #{@parsed.origin}
-    Accept: #{@parsed.accept}
-    </pre>"
   end
 end
 
 
 
-server = Server.new
-server.run
+# server = Server.new
+# server.run
 # server.accept_connection
 # server.take_in_request
 # server.response
