@@ -1,8 +1,10 @@
 class Game
-  attr_reader :answer
+  attr_reader :number, :answer
+  # make it from reader tp attr_accessor later?
 
   def initialize
-    @answer = rand(0..100)
+    @number = rand(0..100)
+    @answer = false
   end
 
   def start
