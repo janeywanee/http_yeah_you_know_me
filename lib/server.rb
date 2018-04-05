@@ -18,7 +18,6 @@ class Server
 
   def take_in_request
     puts "Ready for a request"
-    # request_lines = []
     while line = @client.gets and !line.chomp.empty?
       request_lines << line.chomp
     end
@@ -51,7 +50,6 @@ class Server
       take_in_request
       route
       response
-      # close_connection
     end
   end
 
