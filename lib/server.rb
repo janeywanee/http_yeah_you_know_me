@@ -38,7 +38,7 @@ class Server
     puts ["Wrote this response:", headers, output].join("\n")
     @client.puts headers
     @client.puts output
-    close_connection if @parsed.path == "/shutdown"
+    # close_connection if @parsed.path == "/shutdown"
   end
 
   def close_connection
@@ -58,24 +58,33 @@ class Server
   def route
     @response = []
     case @parsed.path
+      # FIXME:  parsing for word search path
+    when @parsed.path.include?("/word_search")
+
+      dict = File.read('/usr/share/dict/words')
+      word = @parsed.path.split('=')[-1]
+      if dict.include?(word)
+        @response << "#{word} is a known word"
+      else
+        @response << "#{word} is not a known word"
+      end
     when "/hello"
       @hello_counter += 1
       @response << "Hello World! (#{@hello_counter})"
     when "/datetime"
-      @response << Time.now.strftime("4252")
+      @response << Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')
     when "/shutdown"
       @response << "Total Requests: #{@counter}"
     else
-      binding.pry
-        @response << @parsed.diagnostic(request_lines)
+      @response << @parsed.diagnostic
     end
   end
 end
 
 
 
-# server = Server.new
-# server.run
+server = Server.new
+server.run
 # server.accept_connection
 # server.take_in_request
 # server.response

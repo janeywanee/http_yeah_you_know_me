@@ -19,8 +19,7 @@ class Parsing
   end
 
 #Get working!!
-  def diagnostic(request_lines)
-    binding.pry
+  def diagnostic
     "<pre>" + "\r\n" +
   ["Verb: #{verb}",
    "Path: #{path}",

@@ -66,19 +66,9 @@ class ParsingTest < Minitest::Test
     assert_equal "*/*", parsing.accept
   end
 
-
-#need to get working!!!!
   def test_diagonostic_outputs_data
-    skip
     parsing = Parsing.new(@response_data)
-    assert_equal "<pre>\r
-      Verb: GET
-      Path: /
-      Protocol: HTTP/1.1
-      Host: 127.0.0.1
-      Port: 9292
-      Origin: 127.0.0.1
-      Accept: */*</pre>", parsing.diagnostic(request_lines)
+    expected = "<pre>\r\nVerb: GET\nPath: /\nProtocol: HTTP/1.1\nHost: 127.0.0.1\nPort: 9292\nOrigin: 127.0.0.1\nAccept:*/*</pre>"
+    assert_equal expected, parsing.diagnostic
   end
-
 end
