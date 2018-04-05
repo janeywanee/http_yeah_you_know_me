@@ -56,16 +56,9 @@ class Server
   def route
     @response = []
     case @parsed.path
-      # FIXME:  parsing for word search path
     when @parsed.path.include?("/word_search")
-
-      dictionary = File.read('/usr/share/dict/words')
       word = @parsed.path.split('=')[-1]
-      if dictionary.include?(word)
-        @response << "#{word} is a known word"
-      else
-        @response << "#{word} is not a known word"
-      end
+      word_search(word)
     when "/"
       @response << @pasred.diagnostic
     when "/hello"
@@ -79,13 +72,20 @@ class Server
       @response << @parsed.diagnostic
     end
   end
+
+  def word_search(word)
+    dictionary = File.read('/usr/share/dict/words')
+    if dictionary.include?(word)
+      @response << "#{word.upcase} is a known word"
+    else
+      @response << "#{word.upcase} is not a known word"
+    end
+  end
 end
+
+
 
 
 
 server = Server.new
 server.run
-# server.accept_connection
-# server.take_in_request
-# server.response
-# server.close_connection
