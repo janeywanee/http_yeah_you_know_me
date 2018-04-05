@@ -61,13 +61,15 @@ class Server
       # FIXME:  parsing for word search path
     when @parsed.path.include?("/word_search")
 
-      dict = File.read('/usr/share/dict/words')
+      dictionary = File.read('/usr/share/dict/words')
       word = @parsed.path.split('=')[-1]
-      if dict.include?(word)
+      if dictionary.include?(word)
         @response << "#{word} is a known word"
       else
         @response << "#{word} is not a known word"
       end
+    when "/"
+      @response << @pasred.diagnostic
     when "/hello"
       @hello_counter += 1
       @response << "Hello World! (#{@hello_counter})"

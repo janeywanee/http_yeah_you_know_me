@@ -15,7 +15,6 @@ class ParsingTest < Minitest::Test
                      "Accept: */*",
                      "Accept-Encoding: gzip, deflate, br",
                      "Accept-Language: en-US,en;q=0.9"]
-
   end
 
   def test_it_exists

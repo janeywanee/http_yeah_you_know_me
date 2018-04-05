@@ -18,7 +18,6 @@ class Parsing
     @accept = response_data.find { |item| item.start_with?('Accept:') }.split[1]
   end
 
-#Get working!!
   def diagnostic
     "<pre>" + "\r\n" +
   ["Verb: #{verb}",
@@ -30,13 +29,3 @@ class Parsing
    "Accept:#{accept}"].join("\n") + "</pre>"
   end
 end
-
-# "<pre>
-# Verb: #{@parsed}
-# Path: #{@parsed}
-# Protocol: #{@parsed}
-# Host: #{@parsed}
-# Port: #{@parsed}
-# Origin: #{@parsed}
-# Accept: #{@parsed}
-# </pre>"
